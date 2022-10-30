@@ -1,29 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Notification from './Notification';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { Contact } from './Contact';
 
 const ContactList = ({ contacts }) => {
-  const dispatch = useDispatch();
-
   return (
     <div className="contactsField">
       {contacts?.length < 0 ? (
         <Notification message="You don't have any contact 😓" />
       ) : (
         <ul className="contactsList">
-          {contacts.map(({ id, name, number }) => (
-            <li key={id} className="contactsList__item">
-              <span className="contactsList__info">
-                <b>{name}:</b> {number}
-              </span>
-              <button
-                className="contactsList__btn"
-                onClick={() => dispatch(deleteContact())}
-              >
-                Delete
-              </button>
+          {contacts.map(({ id, name, phone }) => (
+            <li key={id}>
+              <Contact id={id} name={name} phone={phone} />
             </li>
           ))}
         </ul>

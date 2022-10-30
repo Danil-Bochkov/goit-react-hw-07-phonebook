@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 
 import PropTypes from 'prop-types';
 
@@ -8,8 +8,13 @@ export default function ContactForm() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const form = evt.currentTarget;
-    dispatch(addContact(form.elements.name.value, form.elements.number.value));
+    const form = evt.target;
+    dispatch(
+      addContact({
+        name: form.elements.name.value,
+        phone: form.elements.number.value,
+      })
+    );
     form.reset();
   };
 
